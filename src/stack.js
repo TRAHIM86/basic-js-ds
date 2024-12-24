@@ -13,20 +13,21 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 class Stack {
-  push(/* element */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  constructor() {                 
+    this.stack = new Array            //дис стек = новый массив
+  }
+
+  push(element) {                     //
+    this.stack.push(element)          //просто пушим в массив наш элемент
   }
 
   pop() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    return this.stack.pop()           //удаляем последний элемент
   }
 
   peek() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
-  }
+    return this.stack[this.stack.length - 1];       //вернуть последний элемент массив[массив.длина - 1]
+  }                                                 //т.е. просто вернуть без удаления
 }
 
 module.exports = {

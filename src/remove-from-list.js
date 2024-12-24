@@ -1,6 +1,6 @@
 const { NotImplementedError } = require('../extensions/index.js');
 
-// const { ListNode } = require('../extensions/list-node.js');
+const { ListNode } = require('../extensions/list-node.js');
 
 /**
  * Given a singly linked list of integers l and an integer k,
@@ -22,10 +22,25 @@ const { NotImplementedError } = require('../extensions/index.js');
  *   }
  * }
  */
-function removeKFromList(/* l, k */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function removeKFromList(l, k) {      //3(1) 1(2) 2(3) 3(4) 4(5) 5(null)    наш l
+  while (l && l.value === k) {        //пока l.value === k, смещаемся вправо. Т.е. пропускаем все наки К (т.е. тройки в начале списка)
+    l = l.next                        //т.к. в начале списка способом ниже не удалить, он удаляет l.value=k остается 1(2) 2(3) 3(4) 4(5) 5(null)
+  }
+    
+  
+  let currentNode = l;                //если l.value !== k, то карент = наш l
+
+         
+  while (currentNode.next) {                      //пока у карента есть.некст
+    if (currentNode.next.value === k) {           //и этот некст === к
+      currentNode.next = currentNode.next.next    //то кар.некст = кар.некст.некст 
+    } else {                                      //если некст !== к
+      currentNode = currentNode.next              //то каренНод = карентНоде.некст
+    }
+  } 
+  return l          //венуть наш отформатированный l 
 }
+
 
 module.exports = {
   removeKFromList

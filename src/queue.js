@@ -1,6 +1,6 @@
 const { NotImplementedError } = require('../extensions/index.js');
 
-// const { ListNode } = require('../extensions/list-node.js');
+const { ListNode } = require('../extensions/list-node.js');
 
 /**
  * Implement the Queue with a given interface via linked list (use ListNode extension above).
@@ -16,18 +16,35 @@ const { NotImplementedError } = require('../extensions/index.js');
 class Queue {
 
   getUnderlyingList() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    return this.head;
   }
 
-  enqueue(/* value */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
-  }
+  //метод для добавления элемента в конец списка (тот же принцип что и аппенд в связанном списке)
+  enqueue(value) {     
+    const newNode = new ListNode(value);   //новый узел
+
+    //если нет начала и конца, то
+    if (!this.head && !this.tail) {    //если нет начала и конца, то
+        this.head = newNode;           //хеад = новый.узел         
+        this.tail = newNode;           //тейл - он же
+    
+        return this             //т.к. не было элементов в листе, дальше идти смысла нету
+    }
+
+
+    //если начало и хвост есть, то:
+    this.tail.next = newNode;     //хвост.некст смотрит на нулл (А-В-С-null), поэтому 
+                                  //вместо null делаем newNode (новый элемент) (А-В-С-'Z')
+                                    
+    this.tail = newNode;          //теперь подправим сссылку на наш хвост, т.к. this.tail пока = "С"
+                                  //теперь он this.tail = "Z"    
+    return this      //в конце вернуть текущий список
+}
 
   dequeue() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    let currentNode = this.head;        //лет карент = хеад (первый элемент)
+    this.head = currentNode.next;       //хеад = карент.некст
+    return currentNode.value            //вернуть вэлью карента (старого хеда)
   }
 }
 
